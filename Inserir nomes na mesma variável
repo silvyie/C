@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct nome {
+    char nome_nome[50];
+    struct nome *prox;
+};
+
+typedef struct nome Nome;
+
+Nome *cria_lista(){
+    return NULL;
+}
+
+Nome *insere_no_fim(Nome *n, char *nome_nome){
+    Nome *novo = malloc(sizeof(Nome));
+    strncpy(novo->nome_nome, nome_nome, sizeof(novo->nome_nome) - 1);
+    novo->nome_nome[sizeof(novo->nome_nome) - 1] = '\0';
+    novo->prox = NULL;
+
+    if(n == NULL){
+        return novo;
+    }
+
+    Nome *p = n;
+    while(p->prox != NULL){
+        p = p->prox;
+    }
+    p->prox = novo;
+
+    return n;
+}
+
+Nome *remove_nome(Nome *n, char *nome_nome){
+    Nome *anterior = NULL;
+    Nome *p = n;
+
+    while(p != NULL && strcmp(p->nome_nome, nome_nome) != 0){
+        anterior = p;
+        p = p->prox;
+    }
+
+    if(p == NULL){
+        printf("Nao encontrou nenhum nome na lista\n");
+        return n;
+    }
+
+    if(anterior == NULL){
+        n = p->prox;
+    }else{
+        anterior->prox = p->prox;
+    }
+
+    free(p);
+    return n;
+}
+
+void imprime(Nome *n){
+    Nome *p = n;
+    while(p != NULL){
+        printf("Lista: %s\n", p->nome_nome);
+        p = p->prox;
+    }
+}
+
+void libera(Nome *n){
+    Nome *p;
+    while(n != NULL){
+        p = n;
+        n = n->prox;
+        free(p);
+    }
+}
