@@ -7,3 +7,4 @@ Exercícios de código em C, faço esses exercícios para praticar, nesse diret�
 - Fila
 - Árvores
   etc...
+Certamente todos os códigos que eu colocar aqui eu irei fazer melhorias futuramente, então não estão acabados.
